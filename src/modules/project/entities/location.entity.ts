@@ -24,7 +24,7 @@ export class Location {
 
   @ApiProperty({})
   @Column()
-  city: string;
+  city?: string;
 
   @OneToOne(() => Project,) // specify inverse side as a second parameter
   project: Project;
