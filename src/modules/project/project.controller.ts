@@ -31,6 +31,13 @@ export class ProjectController {
     return this.projectService.findOne(+id);
   }
 
+
+  @Get('filter/:sector')
+  filter(@Param('sector') sector: string) {
+    console.log(sector)
+    return this.projectService.filter(sector);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectService.update(+id, updateProjectDto);
