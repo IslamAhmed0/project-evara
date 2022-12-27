@@ -30,12 +30,12 @@ export const editFileName = (req, file: Express.Multer.File, callback) => {
 @Module({
   imports: [
     MulterModule.register({
-      dest: '../uploads',
+      dest: './uploads',
       storage: diskStorage({
-        destination: '../uploads',
+        destination: './uploads',
         filename: editFileName,
       }),
-      // fileFilter: imageFileFilter,
+       fileFilter: imageFileFilter,
     })
   ],
   controllers: [FileController],
