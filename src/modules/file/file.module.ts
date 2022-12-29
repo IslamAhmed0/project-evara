@@ -6,13 +6,16 @@ import { MulterModule } from '@nestjs/platform-express';
 import { extname } from 'path';
 
 export const imageFileFilter = (req, file: Express.Multer.File, callback) => {
-
-
-  return file.mimetype === 'image/gif' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/webp' ? callback(null, true) : callback(new Error('Only image files are allowed!'), false);
-
+  return file.mimetype === 'image/gif' ||
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/webp'
+    ? callback(null, true)
+    : callback(new Error('Only image files are allowed!'), false);
 };
 export const editFileName = (req, file: Express.Multer.File, callback) => {
-  console.log('recieved request ',req)
+  console.log('recieved request ', req);
   console.log(file);
 
   const name = file.originalname.split('.')[0];
@@ -26,7 +29,6 @@ export const editFileName = (req, file: Express.Multer.File, callback) => {
   callback(null, `${name}-${randomName}${fileExtName}`);
 };
 
-
 @Module({
   imports: [
     MulterModule.register({
@@ -35,10 +37,10 @@ export const editFileName = (req, file: Express.Multer.File, callback) => {
         destination: './uploads',
         filename: editFileName,
       }),
-       fileFilter: imageFileFilter,
-    })
+      fileFilter: imageFileFilter,
+    }),
   ],
   controllers: [FileController],
-  providers: [FileService]
+  providers: [FileService],
 })
-export class FileModule { }
+export class FileModule {}

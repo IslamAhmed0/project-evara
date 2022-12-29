@@ -26,6 +26,19 @@ export class CreateProjectDto {
 
   @ApiProperty({})
   @Column()
+  city?: string;
+
+  @ApiProperty({})
+  @Column()
+  formImage?: string;
+
+
+  @ApiProperty({})
+  @Column()
+  description?: string;
+
+  @ApiProperty({})
+  @Column()
   Location: LocationDto;
 
   @ApiProperty({ type: () => InternalImageEntity, isArray: true })

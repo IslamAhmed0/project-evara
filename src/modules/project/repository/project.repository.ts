@@ -3,5 +3,4 @@ import { Repository } from 'typeorm/repository/Repository';
 import { Project } from '../entities/project.entity';
 
 @CustomRepository(Project)
-export class ProjectRepository extends Repository<Project> {
-}
+export class ProjectRepository extends Repository<Project> {}

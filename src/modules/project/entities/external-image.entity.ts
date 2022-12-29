@@ -15,8 +15,8 @@ export class ExternalImageEntity {
   id: number;
   @ApiProperty({})
   @Column()
-  path:string;
-  @ManyToOne(() => Project, (project) => project,{
+  path: string;
+  @ManyToOne(() => Project, (project) => project, {
     //cascade:true
   })
   projectExternal: Project;

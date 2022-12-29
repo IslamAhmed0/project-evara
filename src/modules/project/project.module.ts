@@ -8,9 +8,9 @@ import { InternalImageEntity } from './entities/internal-image.entity';
 import { ExternalImageEntity } from './entities/external-image.entity';
 import { InternalImageRepository } from './repository/internal-image.repository';
 import { ExternalImageRepository } from './repository/external-image.repository';
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { Project } from "./entities/project.entity";
-import { Location } from "./entities/location.entity";
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Project } from './entities/project.entity';
+import { Location } from './entities/location.entity';
 
 @Module({
   // imports: [
@@ -26,8 +26,7 @@ import { Location } from "./entities/location.entity";
       Project,
       Location,
       ExternalImageEntity,
-      InternalImageEntity
-
+      InternalImageEntity,
     ]),
   ],
   controllers: [ProjectController],

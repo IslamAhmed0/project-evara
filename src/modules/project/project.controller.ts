@@ -10,7 +10,7 @@ import {
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { Project } from "./entities/project.entity";
+import { Project } from './entities/project.entity';
 
 @Controller('project')
 export class ProjectController {
@@ -31,10 +31,9 @@ export class ProjectController {
     return this.projectService.findOne(+id);
   }
 
-
   @Get('filter/:sector')
   filter(@Param('sector') sector: string) {
-    console.log(sector)
+    console.log(sector);
     return this.projectService.filter(sector);
   }
 

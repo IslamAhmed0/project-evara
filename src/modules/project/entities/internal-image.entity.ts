@@ -16,11 +16,10 @@ export class InternalImageEntity {
   id: number;
   @ApiProperty({})
   @Column()
-  path:string;
+  path: string;
 
-  @ManyToOne(() => Project, (project) => project,{
+  @ManyToOne(() => Project, (project) => project, {
     //cascade:true
-
   })
   projectInternal: Project;
 }

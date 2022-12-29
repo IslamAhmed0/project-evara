@@ -3,10 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { typeOrmConfigAsync } from './config/typeorm.config';
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { ProjectModule } from "./modules/project/project.module";
-import { FileModule } from "./modules/file/file.module";
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProjectModule } from './modules/project/project.module';
+import { FileModule } from './modules/file/file.module';
 
 @Module({
   imports: [
@@ -15,7 +14,7 @@ import { FileModule } from "./modules/file/file.module";
     }),
     TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     ProjectModule,
-    FileModule
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

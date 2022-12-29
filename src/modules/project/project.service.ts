@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ProjectRepository } from './repository/project.repository';
@@ -40,16 +44,15 @@ export class ProjectService {
         .leftJoinAndSelect('q.location', 'location')
         .leftJoinAndSelect('q.internalImageEntity', 'internalImageEntity')
         .leftJoinAndSelect('q.externalImageEntity', 'externalImageEntity')
-        .where('q.sectorName = :sectorName', { sectorName:sector })
+        .where('q.sectorName = :sectorName', { sectorName: sector })
         .getMany();
       if (!db) {
-        throw new NotFoundException()
+        throw new NotFoundException();
       }
       return db;
-    }catch (e) {
+    } catch (e) {
       throw new InternalServerErrorException(e);
     }
-
   }
 
   update(id: number, updateProjectDto: UpdateProjectDto) {

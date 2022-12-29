@@ -26,6 +26,6 @@ export class Location {
   @Column()
   city?: string;
 
-  @OneToOne(() => Project,) // specify inverse side as a second parameter
+  @OneToOne(() => Project) // specify inverse side as a second parameter
   project: Project;
 }
