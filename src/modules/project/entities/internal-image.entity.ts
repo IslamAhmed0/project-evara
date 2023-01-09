@@ -19,7 +19,9 @@ export class InternalImageEntity {
   path: string;
 
   @ManyToOne(() => Project, (project) => project, {
-    //cascade:true
+    //cascade: true,
+    onDelete: 'CASCADE',
+    nullable: true,
   })
   projectInternal: Project;
 }

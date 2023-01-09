@@ -8,7 +8,7 @@ const server: express.Express = express();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-   // .addBearerAuth()
+    // .addBearerAuth()
     .setTitle('project')
     .setDescription('The cats API description')
     .setVersion('1.0')
@@ -17,10 +17,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const corsOptions = {
-    allowedHeaders:'*',
+    allowedHeaders: '*',
     credentials: true,
     origin: '*',
-
   };
   app.enableCors(corsOptions);
   await app.listen(5000);

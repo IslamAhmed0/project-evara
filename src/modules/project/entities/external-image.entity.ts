@@ -17,7 +17,8 @@ export class ExternalImageEntity {
   @Column()
   path: string;
   @ManyToOne(() => Project, (project) => project, {
-    //cascade:true
+    onDelete: 'CASCADE',
+    nullable: true,
   })
   projectExternal: Project;
 }

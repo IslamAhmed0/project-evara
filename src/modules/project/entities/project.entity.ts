@@ -31,19 +31,20 @@ export class Project {
   @Column()
   city?: string;
 
-
   @ApiProperty({})
   @Column()
   formImage?: string;
-
 
   @ApiProperty({})
   @Column()
   description?: string;
 
   @ApiProperty({ type: () => Location })
-  @OneToOne(() => Location, { cascade: true, eager: true }) // specify inverse side as a second parameter
-  @JoinColumn()
+  @OneToOne(() => Location, {
+    cascade: true,
+    eager: true,
+  }) // specify inverse side as a second parameter
+  //@JoinColumn()
   location: Location;
 
   @ApiProperty({ type: () => InternalImageEntity, isArray: true })
@@ -51,12 +52,14 @@ export class Project {
     cascade: true,
     eager: true,
   })
-  internalImageEntity?: InternalImageEntity[];
+  internalImageEntity: InternalImageEntity[];
 
   @ApiProperty({ type: () => ExternalImageEntity, isArray: true })
   @OneToMany(() => ExternalImageEntity, (cal) => cal.projectExternal, {
     cascade: true,
     eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  externalImageEntity?: ExternalImageEntity[];
+  externalImageEntity: ExternalImageEntity[];
 }

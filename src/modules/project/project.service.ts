@@ -1,4 +1,7 @@
 import {
+  ForbiddenException,
+  HttpException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -12,12 +15,18 @@ import { ExternalImageRepository } from './repository/external-image.repository'
 import { Project } from './entities/project.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
+import { InternalImageEntity } from './entities/internal-image.entity';
+import { ExternalImageEntity } from './entities/external-image.entity';
 
 @Injectable()
 export class ProjectService {
   constructor(
     @InjectRepository(Project)
     private readonly repo: Repository<Project>,
+    @InjectRepository(InternalImageEntity)
+    private readonly internalImageEntity: Repository<InternalImageEntity>,
+    @InjectRepository(ExternalImageEntity)
+    private readonly externalImageEntity: Repository<ExternalImageEntity>,
   ) {}
   async create(createProjectDto: Project) {
     try {
@@ -55,11 +64,21 @@ export class ProjectService {
     }
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(id: number, updateProjectDto: UpdateProjectDto) {
+    return await this.repo.update(id, updateProjectDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async remove(id: number) {
+    try {
+      return await this.repo.delete(id);
+      // await this.repo
+      //   .createQueryBuilder()
+      //   .delete()
+      //   .from(Comment)
+      //   .where('id = :id', { id: comment.id })
+      //   .execute();
+    } catch (e) {
+      throw new InternalServerErrorException(e);
+    }
   }
 }
