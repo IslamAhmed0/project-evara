@@ -44,7 +44,7 @@ export class Project {
     cascade: true,
     eager: true,
   }) // specify inverse side as a second parameter
-  //@JoinColumn()
+  @JoinColumn()
   location: Location;
 
   @ApiProperty({ type: () => InternalImageEntity, isArray: true })
