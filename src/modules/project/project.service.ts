@@ -63,6 +63,19 @@ export class ProjectService {
       throw new InternalServerErrorException(e);
     }
   }
+  async filterCity(city: string) {
+    try {
+      const db = await this.repo
+        .createQueryBuilder('q')
+        .select('q.sectorName')
+        .where('q.city = :city', { city: city })
+        .getManyAndCount();
+
+      return db;
+    } catch (e) {
+      throw new InternalServerErrorException(e);
+    }
+  }
 
   async update(id: number, updateProjectDto: UpdateProjectDto) {
     return await this.repo.update(id, updateProjectDto);

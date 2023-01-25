@@ -36,13 +36,18 @@ export class ProjectController {
     console.log(sector);
     return this.projectService.filter(sector);
   }
+  @Get('countByCity/:city')
+  filterCity(@Param('city') sector: string) {
+    console.log(sector);
+    return this.projectService.filterCity(sector);
+  }
 
-  @Patch(':id')
+  @Patch('/:id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectService.update(+id, updateProjectDto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.projectService.remove(+id);
   }

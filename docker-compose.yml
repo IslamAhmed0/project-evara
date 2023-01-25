@@ -1,9 +1,0 @@
-#version docker
-version: "3"
-services:
-  node-app:
-    container_name: evara_1
-    build: .
-
-
-
