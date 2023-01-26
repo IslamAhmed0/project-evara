@@ -66,10 +66,10 @@ export class ProjectService {
   async filterCity(city: string) {
     try {
       const db = await this.repo.createQueryBuilder("q")
-          .select(["COUNT(q.sectorName)",'q.sectorName as sectorName'])
-          .groupBy('q.sectorName')
-          // .addSelect('q.sectorName','sectorName')
-          .getRawMany();
+        .select(['COUNT(q.sectorName)', 'q.sectorName as sectorName'])
+        .groupBy('q.sectorName')
+          .where('q.city = :city', { city: city })
+        .getRawMany();
 
       return db;
     } catch (e) {
