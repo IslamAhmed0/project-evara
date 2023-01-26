@@ -6,12 +6,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { ProjectRepository } from './repository/project.repository';
-import { LocationRepository } from './repository/location.repository';
-import { InternalImageRepository } from './repository/internal-image.repository';
-import { ExternalImageRepository } from './repository/external-image.repository';
 import { Project } from './entities/project.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
@@ -65,10 +60,30 @@ export class ProjectService {
   }
   async filterCity(city: string) {
     try {
-      const db = await this.repo.createQueryBuilder("q")
+      const db = await this.repo
+        .createQueryBuilder('q')
         .select(['COUNT(q.sectorName)', 'q.sectorName as sectorName'])
         .groupBy('q.sectorName')
-          .where('q.city = :city', { city: city })
+        .where('q.city = :city', { city: city })
+        .getRawMany();
+
+      return db;
+    } catch (e) {
+      throw new InternalServerErrorException(e);
+    }
+  }
+
+  async filterSector(sector: string) {
+    try {
+      const db = await this.repo
+        .createQueryBuilder('q')
+        .select([
+          'COUNT(q.id) as count',
+          'q.sectorName as sector',
+          'q.city as city',
+        ])
+        .groupBy('q.id')
+        .where('q.sectorName = :sectorName', { sectorName: sector })
         .getRawMany();
 
       return db;

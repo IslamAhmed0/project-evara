@@ -11,6 +11,7 @@ import { FileModule } from './modules/file/file.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+
     }),
     TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     ProjectModule,
