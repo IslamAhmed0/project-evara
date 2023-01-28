@@ -82,7 +82,8 @@ export class ProjectService {
           'q.sectorName as sector',
           'q.city as city',
         ])
-        .groupBy('q.id')
+        .groupBy('q.sectorName')
+          .addGroupBy(' q.city')
         .where('q.sectorName = :sectorName', { sectorName: sector })
         .getRawMany();
 
